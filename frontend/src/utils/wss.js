@@ -3,9 +3,6 @@ import { setRoomId, setParticipants, setSocketId } from "../store/actions";
 import store from "../store/store";
 import * as webRTCHandler from "./webRTCHandler";
 import configData from "../../src/config.json";
-import { appendNewMessageToChatHistory } from "./directMessages";
-
-
 
 let socket = null;
 
@@ -50,9 +47,6 @@ export const connectWithSocketIOServer = () => {
     webRTCHandler.removePeerConnection(data);
   });
 
-  socket.on("direct-message", (data) => {
-    appendNewMessageToChatHistory(data);
-  });
 };
 
 export const createNewRoom = (identity, onlyAudio) => {
