@@ -15,6 +15,12 @@ const RoomPage = ({
   connectOnlyWithAudio,
 }) => {
   useEffect(() => {
+    debugger;
+    isRoomHost = true;
+    identity = "ali demir";
+    connectOnlyWithAudio = false;
+    // roomId = "94097f30-ec50-4caa-9249-868b23dd833a";
+
     if (!isRoomHost && !roomId) {
       const siteUrl = window.location.origin;
       window.location.href = siteUrl;
