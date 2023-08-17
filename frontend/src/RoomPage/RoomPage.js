@@ -58,8 +58,8 @@ const RoomPage = ({
 
   return (
     <div className="room_container">
-      <VideoSection />
-      <RoomLabel roomId={roomId} />
+      <VideoSection roomId={roomId} />
+
       {showOverlay && <Overlay />}
     </div>
   );

@@ -10,8 +10,6 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import * as webRTCHandler from "../../utils/webRTCHandler";
 import LocalScreenSharingPreview from "./LocalScreenSharingPreview";
 const VideoSection = (props) => {
-  const [roomId, setRoomId] = useState('')
-
 
   const connectOnlyWithAudio = false;
   const constraints = {
@@ -107,7 +105,7 @@ const VideoSection = (props) => {
 
           <Grid item={true} md={12} >
             <div className="room_label">
-              <p className="room_label_paragraph">ID: {roomId} </p>
+              <p className="room_label_paragraph">ID: {props.roomId} </p>
             </div>
           </Grid>
 
