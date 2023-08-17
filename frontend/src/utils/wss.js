@@ -2,14 +2,15 @@ import io from "socket.io-client";
 import { setRoomId, setParticipants, setSocketId } from "../store/actions";
 import store from "../store/store";
 import * as webRTCHandler from "./webRTCHandler";
+import configData from "../../src/config.json";
 import { appendNewMessageToChatHistory } from "./directMessages";
 
-const SERVER = "http://localhost:5002";
+
 
 let socket = null;
 
 export const connectWithSocketIOServer = () => {
-  socket = io(SERVER);
+  socket = io(configData.API_URL);
 
   socket.on("connect", () => {
     console.log("successfully connected with socket io server");
