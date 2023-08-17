@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import VideoSection from "./VideoSection/VideoSection";
-import RoomLabel from "./RoomLabel";
 import { connect } from "react-redux";
 import * as webRTCHandler from "../utils/webRTCHandler";
 import Overlay from "./Overlay";
-
+import RoomLabel from "./RoomLabel";
 import "./RoomPage.css";
 
 const RoomPage = ({
@@ -15,11 +14,10 @@ const RoomPage = ({
   connectOnlyWithAudio,
 }) => {
   useEffect(() => {
-    debugger;
     isRoomHost = true;
     identity = "ali demir";
     connectOnlyWithAudio = false;
-    // roomId = "94097f30-ec50-4caa-9249-868b23dd833a";
+    //  roomId = "9cd8dc69-dca8-4ada-9106-0fbee8485aed";
 
     if (!isRoomHost && !roomId) {
       const siteUrl = window.location.origin;
@@ -33,6 +31,30 @@ const RoomPage = ({
       );
     }
   }, []);
+
+  const connect = () => {
+
+    isRoomHost = true;
+    identity = "ali demir";
+    connectOnlyWithAudio = false;
+    //  roomId = "9cd8dc69-dca8-4ada-9106-0fbee8485aed";
+
+    if (!isRoomHost && !roomId) {
+
+      const siteUrl = window.location.origin;
+      window.location.href = siteUrl;
+    } else {
+
+      webRTCHandler.getLocalPreviewAndInitRoomConnection(
+        isRoomHost,
+        identity,
+        roomId,
+        connectOnlyWithAudio
+      );
+    }
+
+  }
+
 
   return (
     <div className="room_container">

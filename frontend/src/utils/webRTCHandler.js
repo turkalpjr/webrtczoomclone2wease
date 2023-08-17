@@ -1,4 +1,4 @@
-import { setShowOverlay, setMessages } from "../store/actions";
+import { setShowOverlay } from "../store/actions";
 import store from "../store/store";
 import * as wss from "./wss";
 import * as recordingUtils from "./recordingUtils";
@@ -28,8 +28,8 @@ export const toggleCamera = (isDisabled) => {
   localStream.getVideoTracks()[0].enabled = isDisabled ? true : false;
 };
 
-export const  handleRecordButtonPressed=(boolVal)=>{
-  boolVal==true? recordingUtils.stopRecording():recordingUtils.startRecording();
+export const handleRecordButtonPressed = (boolVal) => {
+  boolVal == true ? recordingUtils.stopRecording() : recordingUtils.startRecording();
 }
 
 export const getLocalPreviewAndInitRoomConnection = async (
@@ -121,10 +121,7 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
     streams = [...streams, stream];
   });
 
-  peers[connUserSocketId].on("data", (data) => {
-    const messageData = JSON.parse(data);
-    appendNewMessage(messageData);
-  });
+
 };
 
 export const handleSignalingData = (data) => {
@@ -268,31 +265,3 @@ const switchVideoTracks = (stream) => {
   }
 };
 
-////////////////////////////////// Messages /////////////////////////////////////
-const appendNewMessage = (messageData) => {
-  const messages = store.getState().messages;
-  store.dispatch(setMessages([...messages, messageData]));
-};
-
-export const sendMessageUsingDataChannel = (messageContent) => {
-  // append this message locally
-  const identity = store.getState().identity;
-
-  const localMessageData = {
-    content: messageContent,
-    identity,
-    messageCreatedByMe: true,
-  };
-
-  appendNewMessage(localMessageData);
-
-  const messageData = {
-    content: messageContent,
-    identity,
-  };
-
-  const stringifiedMessageData = JSON.stringify(messageData);
-  for (let socketId in peers) {
-    peers[socketId].send(stringifiedMessageData);
-  }
-};
