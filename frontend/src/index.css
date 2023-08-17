@@ -14,8 +14,10 @@ code {
 
 .videos_portal_styles {
   margin-left: 20%;
-  width: 60%;
-  height: calc(100vh - 10%);
+  width: 50%;
+  /* height: calc(100vh - 10%); */
+  height: 700px;
+
   left: 0;
   top: 0;
   position: absolute;

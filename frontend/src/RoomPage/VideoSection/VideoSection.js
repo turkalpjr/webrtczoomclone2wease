@@ -9,6 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import * as webRTCHandler from "../../utils/webRTCHandler";
 import LocalScreenSharingPreview from "./LocalScreenSharingPreview";
+import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
 const VideoSection = (props) => {
 
   const connectOnlyWithAudio = false;
@@ -23,7 +24,6 @@ const VideoSection = (props) => {
   const [screenSharingStream, setScreenSharingStream] = useState(null);
 
   const handleScreenShareToggle = async () => {
-    debugger;
     if (!isScreenSharingActive) {
       let stream = null;
       try {
@@ -75,7 +75,18 @@ const VideoSection = (props) => {
 
       <Box component="form"   >
         <Grid container display="flex" spacing={1} className="CenterItem"  >
-          <Grid item={true} md={12} >
+          <Grid item={true} md={5} >
+            <label> id</label>
+            <TextField value={props.roomIdFromHyperlink}
+              inputProps={{
+                style: {
+                  height: "11px",
+                },
+              }}
+              fullWidth />
+          </Grid>
+          <Grid item={true} md={5} >
+            <label>name</label>
             <TextField
               inputProps={{
                 style: {
@@ -84,7 +95,24 @@ const VideoSection = (props) => {
               }}
               fullWidth />
           </Grid>
+          <Grid item={true} md={2} >
+            <Button style={{ marginTop: '26px' }} type="button" size="medium" variant='outlined' startIcon={<KeyboardTabIcon />} > </Button>
+          </Grid>
         </Grid>
+
+
+        <Grid container display="flex" spacing={1} className="CenterItem"  >
+          <Grid item={true} md={12} >
+            <TextField value={props.hyperlink}
+              inputProps={{
+                style: {
+                  height: "11px",
+                },
+              }}
+              fullWidth />
+          </Grid>
+        </Grid>
+
         <Grid container display="flex" spacing={1} className="CenterItem"  >
           <Grid item={true} md={2} >
             <Button type="button" size="medium" variant='contained' onClick={handleMicButtonPressed} startIcon={<MicNoneIcon />} >  </Button>
