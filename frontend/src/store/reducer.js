@@ -36,6 +36,11 @@ const reducer = (state = initState, action) => {
         ...state,
         showOverlay: action.showOverlay,
       };
+    case Actions.SET_PARTICIPANTS:
+      return {
+        ...state,
+        participants: action.participants,
+      };
     case Actions.SET_SOCKET_ID:
       return {
         ...state,

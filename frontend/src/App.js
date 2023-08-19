@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 import RoomPage from './RoomPage/RoomPage';
 import { connectWithSocketIOServer } from './utils/wss';
-import './App.css';
 function App() {
 
   useEffect(() => {

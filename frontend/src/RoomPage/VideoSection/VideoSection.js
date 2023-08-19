@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 
 import { Grid, Button, TextField, Box } from '@mui/material';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
@@ -10,8 +10,36 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import * as webRTCHandler from "../../utils/webRTCHandler";
 import LocalScreenSharingPreview from "./LocalScreenSharingPreview";
 import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
-const VideoSection = (props) => {
+import configData from "../../../src/config.json";
+import { setIsRoomHost } from "../../store/actions";
 
+const VideoSection = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    setRoomIdFromHyperlink(id) {
+      setRoomId(id);
+    }
+  }));
+
+  useEffect(() => {
+
+    setHyperlinkId({
+      hyperlinkId: configData.FULL_URL + "/" + props.roomId
+    })
+
+
+  }, []);
+  const ConnectButton = () => {
+    setIsRoomHost(false);
+    webRTCHandler.getLocalPreviewAndInitRoomConnection(
+      false,
+      "kerem",
+      roomId,
+      false
+    );
+ 
+  };
+  const [roomId, setRoomId] = useState('')
+  const [hyperlinkId, setHyperlinkId] = useState('')
   const connectOnlyWithAudio = false;
   const constraints = {
     audio: false,
@@ -73,19 +101,27 @@ const VideoSection = (props) => {
   return (
     <div className="video_section_container">
 
-      <Box component="form"   >
-        <Grid container display="flex" spacing={1} className="CenterItem"  >
-          <Grid item={true} md={5} >
+      <Box component="form" className="CenterItem"   >
+        <Grid container display="flex" spacing={1}   >
+          <Grid item={true} md={7} >
             <label> id</label>
-            <TextField value={props.roomIdFromHyperlink}
+            <TextField id="roomId"
+              defaultValue={roomId}
+              value={roomId}
               inputProps={{
                 style: {
                   height: "11px",
                 },
               }}
-              fullWidth />
+              fullWidth
+              onChange={(e) => {
+                setRoomId(
+                  prev => ({ ...prev, roomId: e.target.value })
+                )
+              }}
+            />
           </Grid>
-          <Grid item={true} md={5} >
+          <Grid item={true} md={3} >
             <label>name</label>
             <TextField
               inputProps={{
@@ -93,23 +129,31 @@ const VideoSection = (props) => {
                   height: "11px",
                 },
               }}
-              fullWidth />
+              fullWidth
+
+            />
           </Grid>
           <Grid item={true} md={2} >
-            <Button style={{ marginTop: '26px' }} type="button" size="medium" variant='outlined' startIcon={<KeyboardTabIcon />} > </Button>
+            <Button onClick={ConnectButton} style={{ marginTop: '26px' }} type="button" size="medium" variant='outlined' startIcon={<KeyboardTabIcon />}  > </Button>
           </Grid>
         </Grid>
 
 
         <Grid container display="flex" spacing={1} className="CenterItem"  >
           <Grid item={true} md={12} >
-            <TextField value={props.hyperlink}
+            <TextField id="hyperlinkId" value={configData.FULL_URL + "?id=" + props.roomId}
               inputProps={{
                 style: {
                   height: "11px",
                 },
               }}
-              fullWidth />
+              fullWidth
+              onChange={(e) => {
+                setHyperlinkId(
+                  prev => ({ ...prev, hyperlinkId: e.target.value })
+                )
+              }}
+            />
           </Grid>
         </Grid>
 
@@ -149,7 +193,7 @@ const VideoSection = (props) => {
       </Box>
     </div >
   );
-};
+});
+
 
 export default VideoSection;
-

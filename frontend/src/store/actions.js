@@ -4,7 +4,8 @@ const Actions = {
   SET_IDENTITY: "SET_IDENTITY",
   SET_ROOM_ID: "SET_ROOM_ID",
   SET_SHOW_OVERLAY: "SET_SHOW_OVERLAY",
-  SET_SOCKET_ID: 'SET_SOCKET_ID'
+  SET_SOCKET_ID: 'SET_SOCKET_ID',
+  SET_PARTICIPANTS: "SET_PARTICIPANTS",
 };
 
 export const setIsRoomHost = (isRoomHost) => {
@@ -42,6 +43,12 @@ export const setShowOverlay = (showOverlay) => {
   };
 };
 
+export const setParticipants = (participants) => {
+  return {
+    type: Actions.SET_PARTICIPANTS,
+    participants,
+  };
+};
 export const setSocketId = (socketId) => {
   return {
     type: Actions.SET_SOCKET_ID,
