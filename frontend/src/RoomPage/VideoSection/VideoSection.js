@@ -36,7 +36,7 @@ const VideoSection = forwardRef((props, ref) => {
       roomId,
       false
     );
- 
+
   };
   const [roomId, setRoomId] = useState('')
   const [hyperlinkId, setHyperlinkId] = useState('')
@@ -175,11 +175,11 @@ const VideoSection = forwardRef((props, ref) => {
             {!connectOnlyWithAudio && <Button type="button" size="medium" variant='outlined' onClick={handleScreenShareToggle} startIcon={<ScreenShareIcon />} > </Button>}
           </Grid>
 
-          <Grid item={true} md={12} >
+          {/* <Grid item={true} md={12} >
             <div className="room_label">
               <p className="room_label_paragraph">ID: {props.roomId} </p>
             </div>
-          </Grid>
+          </Grid> */}
 
         </Grid>
 

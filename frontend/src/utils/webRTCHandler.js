@@ -155,13 +155,13 @@ export const removePeerConnection = (data) => {
 const showLocalVideoPreview = (stream) => {
   const videosContainer = document.getElementById("videos_portal");
 
-  debugger;
+
   videosContainer.classList.add("videos_portal_styles");
   const videoContainer = document.createElement("div");
   videoContainer.classList.add("video_track_container");
   const videoElement = document.createElement("video");
   videoElement.autoplay = true;
-  videoElement.muted = true;
+  videoElement.muted = false;
   videoElement.srcObject = stream;
 
 
@@ -187,7 +187,6 @@ const addStream = (stream, connUserSocketId) => {
   const videosContainer = document.getElementById("videos_portal");
   const videoContainer = document.createElement("div");
   videoContainer.id = connUserSocketId;
-  debugger;
   videoContainer.classList.add("video_track_container");
   const videoElement = document.createElement("video");
   videoElement.autoplay = true;
@@ -210,7 +209,6 @@ const addStream = (stream, connUserSocketId) => {
 
   // check if other user connected only with audio
   const participants = store.getState().participants;
-  debugger;
   const participant = participants.find((p) => p.socketId === connUserSocketId);
   console.log(participant);
   if (participant?.onlyAudio) {

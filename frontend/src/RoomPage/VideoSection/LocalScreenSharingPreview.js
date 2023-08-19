@@ -15,7 +15,7 @@ const LocalScreenSharingPreview = ({ stream }) => {
 
   return (
     <div className="local_screen_share_preview">
-      <video muted autoPlay ref={localPreviewRef}></video>
+      <video autoPlay ref={localPreviewRef}></video>
     </div>
   );
 };

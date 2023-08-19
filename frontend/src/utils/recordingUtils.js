@@ -7,11 +7,12 @@ const recordedChunks = [];
 const constraints = {
   audio: true,
   video: true,
-  preferCurrentTab:true
+  preferCurrentTab: true
 };
 
 export const startRecording = async () => {
   const remoteStream = await navigator.mediaDevices.getDisplayMedia(constraints);
+ 
   if (MediaRecorder.isTypeSupported(vp9Codec)) {
     mediaRecorder = new MediaRecorder(remoteStream, vp9Options);
   } else {
